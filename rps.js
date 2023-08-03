@@ -11,7 +11,8 @@ function getComputerChoice() {
     else return "scissors";
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    const computerSelection = getComputerChoice();
     // so we can safely compare
     playerSelection.toLowerCase();
     // we put the results into this div
@@ -40,6 +41,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 const buttons = document.querySelectorAll('button'); // this is a node list
+
 // we add to each button an event listener,
 // which plays a round when clicked according to the button's id
 buttons.forEach((button) => {
@@ -55,7 +57,7 @@ buttons.forEach((button) => {
 	  playerScore = 0;
 	  computerScore = 0;
       }
-      playRound(button.id, getComputerChoice());
+      playRound(button.id);
       const result = document.createElement('p');
       result.style.fontWeight = 'bold';
       if (playerScore === 5) {
@@ -68,6 +70,4 @@ buttons.forEach((button) => {
       }
   });
 });
-
-
 
