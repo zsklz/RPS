@@ -33,15 +33,6 @@ function playRound(playerSelection, computerSelection) {
 function game() {
     let playerScore = 0;
     let computerScore = 0;
-    // game loop
-    for (let i = 0; i < 5; ++i) {
-	let playerSelection = prompt("Choose either rock, paper, or scissors:");
-	// We play a round. Either the player or the computer gets a point based
-	// on the return value
-	let roundResult = playRound(playerSelection, getComputerChoice());
-	if (roundResult) ++playerScore;
-	else if (roundResult === 0) ++computerScore;
-    }
     console.log("The Game is over.")
     if (playerScore > computerScore)
 	console.log("You won!");
