@@ -11,9 +11,13 @@ function getComputerChoice() {
 function playRound(playerSelection, computerSelection) {
     // so we can safely compare
     playerSelection.toLowerCase();
+    // we put the results into this div
+    const results = document.querySelector('#results');
+    const result = document.createElement('p');
     // we check if the strings match
     if (playerSelection === computerSelection) {
-	console.log( "It's a tie.");
+	result.textContent = "It's a tie."
+	results.appendChild(result);
 	// returns undefined
 	return;
     }
@@ -21,11 +25,13 @@ function playRound(playerSelection, computerSelection) {
     else if (playerSelection === "rock" && computerSelection === "scissors"
 	     || playerSelection === "paper" && computerSelection === "rock"
 	     || playerSelection === "scissors" && computerSelection === "paper") {
-	console.log(`You win! ${playerSelection} beats ${computerSelection}.`);
+	result.textContent = (`You win! ${playerSelection} beats ${computerSelection}.`);
+	results.appendChild(result);
 	return 1;
     }
     else {
-	console.log(`You lose! ${computerSelection} beats ${playerSelection}.`);
+	result.textContent = (`You lose! ${computerSelection} beats ${playerSelection}.`);
+	results.appendChild(result);
 	return 0;
     }
 }
@@ -54,4 +60,6 @@ buttons.forEach((button) => {
       playRound(button.id, getComputerChoice());
   });
 });
+
+
 
