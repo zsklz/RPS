@@ -14,8 +14,6 @@ function getComputerChoice() {
 
 function playRound(playerSelection) {
     const computerSelection = getComputerChoice();
-    // so we can safely compare
-    playerSelection.toLowerCase();
     // we put the results into this div
     const results = document.querySelector('#results');
     const result = document.createElement('p');
