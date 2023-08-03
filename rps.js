@@ -39,19 +39,6 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-
-function game(playerScore, computerScore) {
-    playRound(button.id, getComputerChoice());
-    console.log("The Game is over.")
-    if (playerScore > computerScore)
-	console.log("You won!");
-    else if (playerScore < computerScore)
-	console.log("You lost!");
-    else
-	console.log("It's a tie.");
-    console.log(`(${playerScore} - ${computerScore})`);
-}
-
 const buttons = document.querySelectorAll('button'); // this is a node list
 // we add to each button an event listener,
 // which plays a round when clicked according to the button's id
