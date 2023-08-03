@@ -1,5 +1,6 @@
 let playerScore = 0;
 let computerScore = 0;
+const buttons = document.querySelectorAll('button'); // this is a node list
 
 // returns computer's choice based on a pseudorandom number
 function getComputerChoice() {
@@ -39,8 +40,6 @@ function playRound(playerSelection) {
 	results.appendChild(result);
     }
 }
-
-const buttons = document.querySelectorAll('button'); // this is a node list
 
 function clickEvent(event) {
     // we reset if game over
