@@ -1,3 +1,6 @@
+let playerScore = 0;
+let computerScore = 0;
+
 // returns computer's choice based on a pseudorandom number
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * 3);
@@ -18,38 +21,36 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
 	result.textContent = "It's a tie."
 	results.appendChild(result);
-	// returns undefined
-	return;
     }
     // we check if the player won
     else if (playerSelection === "rock" && computerSelection === "scissors"
 	     || playerSelection === "paper" && computerSelection === "rock"
 	     || playerSelection === "scissors" && computerSelection === "paper") {
-	result.textContent = (`You win! ${playerSelection} beats ${computerSelection}.`);
+	++playerScore;
+	result.textContent = (`You win! ${playerSelection} beats ${computerSelection}.
+        (${playerScore} - ${computerScore})`);
 	results.appendChild(result);
-	return 1;
     }
     else {
-	result.textContent = (`You lose! ${computerSelection} beats ${playerSelection}.`);
+	++computerScore;
+	result.textContent = (`You lose! ${computerSelection} beats ${playerSelection}.
+        (${playerScore} - ${computerScore})`);
 	results.appendChild(result);
-	return 0;
     }
 }
 
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
+
+function game(playerScore, computerScore) {
+    playRound(button.id, getComputerChoice());
     console.log("The Game is over.")
     if (playerScore > computerScore)
 	console.log("You won!");
     else if (playerScore < computerScore)
 	console.log("You lost!");
     else
-	console.org("It's a tie.");
+	console.log("It's a tie.");
     console.log(`(${playerScore} - ${computerScore})`);
 }
-
-// game();
 
 const buttons = document.querySelectorAll('button'); // this is a node list
 // we add to each button an event listener,
@@ -57,7 +58,27 @@ const buttons = document.querySelectorAll('button'); // this is a node list
 buttons.forEach((button) => {
 
   button.addEventListener('click', () => {
+      // we reset if game over
+      if (playerScore === 5 || computerScore === 5) {
+	  const results = document.querySelector('#results');
+	  // removes all children (in this case paragraphs) of the results div
+	  while (results.firstChild) {
+	      results.removeChild(results.lastChild);
+	  }
+	  playerScore = 0;
+	  computerScore = 0;
+      }
       playRound(button.id, getComputerChoice());
+      const result = document.createElement('p');
+      result.style.fontWeight = 'bold';
+      if (playerScore === 5) {
+	  result.textContent = "You won!"
+	  results.appendChild(result);
+      }
+      else if (computerScore === 5) {
+	  result.textContent = "You lost!"
+	  results.appendChild(result);
+      }
   });
 });
 
