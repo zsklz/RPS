@@ -43,4 +43,15 @@ function game() {
     console.log(`(${playerScore} - ${computerScore})`);
 }
 
-game();
+// game();
+
+const buttons = document.querySelectorAll('button'); // this is a node list
+// we add to each button an event listener,
+// which plays a round when clicked according to the button's id
+buttons.forEach((button) => {
+
+  button.addEventListener('click', () => {
+      playRound(button.id, getComputerChoice());
+  });
+});
+
