@@ -42,32 +42,31 @@ function playRound(playerSelection) {
 
 const buttons = document.querySelectorAll('button'); // this is a node list
 
+function clickEvent(event) {
+    // we reset if game over
+    if (playerScore === 5 || computerScore === 5) {
+	const results = document.querySelector('#results');
+	// removes all children (in this case paragraphs) of the results div
+	while (results.firstChild) {
+	    results.removeChild(results.lastChild);
+	}
+	playerScore = 0;
+	computerScore = 0;
+    }
+    playRound(event.target.id);
+    const result = document.createElement('p');
+    result.style.fontWeight = 'bold';
+    if (playerScore === 5) {
+	result.textContent = "You won!"
+	results.appendChild(result);
+    }
+    else if (computerScore === 5) {
+	result.textContent = "You lost!"
+	results.appendChild(result);
+    }
+}
+
 // we add to each button an event listener,
 // which plays a round when clicked according to the button's id
-buttons.forEach((button) => {
-
-  button.addEventListener('click', () => {
-      // we reset if game over
-      if (playerScore === 5 || computerScore === 5) {
-	  const results = document.querySelector('#results');
-	  // removes all children (in this case paragraphs) of the results div
-	  while (results.firstChild) {
-	      results.removeChild(results.lastChild);
-	  }
-	  playerScore = 0;
-	  computerScore = 0;
-      }
-      playRound(button.id);
-      const result = document.createElement('p');
-      result.style.fontWeight = 'bold';
-      if (playerScore === 5) {
-	  result.textContent = "You won!"
-	  results.appendChild(result);
-      }
-      else if (computerScore === 5) {
-	  result.textContent = "You lost!"
-	  results.appendChild(result);
-      }
-  });
-});
+buttons.forEach((button) => { button.addEventListener('click', clickEvent); });
 
